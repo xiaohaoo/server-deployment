@@ -13,7 +13,7 @@ echo '> 开始上传'
 scp $local_path/build/libs/*.jar $remote_user_host:$remote_path
 
 echo '> 开始启动'
-ssh -Tq  remote_user_host << "EOF"
+ssh -Tq $remote_user_host << "EOF"
 
 # 配置启动端口和路径
 app_port="{app_port}"
