@@ -10,8 +10,7 @@ cd $local_path || exit
 npm run craco-build || exit
 
 echo '> 开始上传'
-ssh -Tq  $remote_user_host << "EOF"
-remote_path="/usr/share/nginx/html/{path}"
+ssh -Tq  $remote_user_host <<EOF
 rm -rf $remote_path/*
 exit
 EOF
