@@ -16,7 +16,7 @@ scp $local_path/build/libs/*.jar $remote_user_host:$remote_path
 echo '> 开始启动'
 ssh -Tq $remote_user_host <<EOF
 cd $remote_path
-pid=$(lsof -i:$app_port | sed -n "2,1p" | awk '{print $2}')
+pid="\$(lsof -i:$app_port | sed -n "2,1p" | awk '{print \$2}')"
 test -n "\$pid" && kill -9 "\$pid"
 nohup java -jar *.jar > nohup.out 2>&1 &
 exit
