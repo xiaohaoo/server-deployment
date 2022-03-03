@@ -1,8 +1,10 @@
-## server-deployment
+# server-deployment
 
 前端与后端部署发布脚本
 
-### 后端发布
+# 后端发布
+
+后端使用Gradle构建Java项目,发布脚本：
 
 ```shell
 #!/bin/bash
@@ -34,7 +36,9 @@ echo -e "\033[32m> 部署完成\033[0m"
 
 [脚本程序](server-gradle-deployment.sh)
 
-### 前端发布
+## 前端发布
+
+前端使用npm构建web项目,发布脚本：
 
 ```shell
 #!/bin/bash
