@@ -1,11 +1,10 @@
-## remote-deployment
+## server-deployment
+
 前端与后端部署发布脚本
 
 ### 后端发布
 
-[脚本程序](deploy-server.sh)
-
-```bash
+```shell
 #!/bin/bash
 
 # 部署配置（替换变量值）
@@ -33,5 +32,32 @@ EOF
 echo -e "\033[32m> 部署完成\033[0m"
 ```
 
+[脚本程序](server-gradle-deployment.sh)
+
 ### 前端发布
-[脚本程序](deploy-web.sh)
+
+```shell
+#!/bin/bash
+
+# 部署配置
+local_path="{local_path}"
+remote_path="/usr/share/nginx/html/{path}"
+remote_user_host="{remote_user_host}"
+
+echo '> 开始打包'
+cd $local_path || exit
+npm run craco-build || exit
+
+echo '> 开始上传'
+ssh -Tq  $remote_user_host <<EOF
+rm -rf $remote_path/*
+exit
+EOF
+
+scp -r $local_path/build/* $remote_user_host:$remote_path || exit
+
+echo -e "\033[32m> 部署完成\033[0m"
+
+```
+
+[脚本程序](web-npm-deployment.sh)
