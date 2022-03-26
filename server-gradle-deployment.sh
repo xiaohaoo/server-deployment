@@ -8,7 +8,7 @@ app_port="{app_port}"
 
 echo '> 开始打包'
 cd $local_path || exit
-./gradlew bootJar
+./gradlew bootJar || exit
 
 echo '> 开始上传'
 ssh -Tq  $remote_user_host "mkdir -p $remote_path"
