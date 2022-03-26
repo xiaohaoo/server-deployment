@@ -20,6 +20,7 @@ cd $local_path || exit
 ./gradlew bootJar
 
 echo '> 开始上传'
+ssh -Tq  $remote_user_host "mkdir -p $remote_path"
 scp $local_path/build/libs/*.jar $remote_user_host:$remote_path
 
 echo '> 开始启动'
@@ -53,6 +54,7 @@ cd $local_path || exit
 npm run craco-build || exit
 
 echo '> 开始上传'
+mkdir -p $remote_path
 ssh -Tq  $remote_user_host <<EOF
 rm -rf $remote_path/*
 exit
