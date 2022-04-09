@@ -54,8 +54,8 @@ cd $local_path || exit
 npm run craco-build || exit
 
 echo '> 开始上传'
-mkdir -p $remote_path
 ssh -Tq  $remote_user_host <<EOF
+mkdir -p $remote_path
 rm -rf $remote_path/*
 exit
 EOF
