@@ -1,69 +1,21 @@
-# server-deployment
+# 常用的部署脚本
 
-前端与后端部署发布脚本
+## 前端与后端部署发布脚本
 
-# 后端发布
+### 后端发布
 
-后端使用Gradle构建Java项目，发布脚本：
+后端使用Gradle构建Java项目，发布脚本：[脚本程序](server-gradle-deployment.sh)。
 
-```shell
-#!/bin/bash
+### 前端发布
 
-# 部署配置（替换变量值）
-local_path="{local_path}"
-remote_path="{remote_path}"
-remote_user_host="{remote_user_host}"
-app_port="{app_port}"
+前端使用npm构建web项目，发布脚本：[脚本程序](web-npm-deployment.sh)。
 
-echo '> 开始打包'
-cd $local_path || exit
-./gradlew bootJar || exit
+## Nginx相关配置
 
-echo '> 开始上传'
-ssh -Tq  $remote_user_host "mkdir -p $remote_path"
-scp $local_path/build/libs/*.jar $remote_user_host:$remote_path
+### HTTPS配置
 
-echo '> 开始启动'
-ssh -Tq $remote_user_host <<EOF
-cd $remote_path
-pid="\$(lsof -i:$app_port | sed -n "2,1p" | awk '{print \$2}')"
-test -n "\$pid" && kill -9 "\$pid"
-nohup java -jar *.jar > nohup.out 2>&1 &
-exit
-EOF
+需要将[脚本程序](nginx/https.conf)放入Nginx的配置目录(/etc/nginx/conf.d/)下，自动加载配置。
 
-echo -e "\033[32m> 部署完成\033[0m"
-```
+### 端口转发配置
 
-[脚本程序](server-gradle-deployment.sh)
-
-## 前端发布
-
-前端使用npm构建web项目，发布脚本：
-
-```shell
-#!/bin/bash
-
-# 部署配置
-local_path="{local_path}"
-remote_path="/usr/share/nginx/html/{path}"
-remote_user_host="{remote_user_host}"
-
-echo '> 开始打包'
-cd $local_path || exit
-npm run craco-build || exit
-
-echo '> 开始上传'
-ssh -Tq  $remote_user_host <<EOF
-mkdir -p $remote_path
-rm -rf $remote_path/*
-exit
-EOF
-
-scp -r $local_path/build/* $remote_user_host:$remote_path || exit
-
-echo -e "\033[32m> 部署完成\033[0m"
-
-```
-
-[脚本程序](web-npm-deployment.sh)
+需要将[脚本程序](nginx/location.conf)放入Nginx的配置目录(/etc/nginx/default.d/)下，自动加载配置。

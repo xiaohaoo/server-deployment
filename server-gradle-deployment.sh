@@ -1,23 +1,23 @@
 #!/bin/bash
 
 # 部署配置（替换变量值）
-local_path="{local_path}"
-remote_path="{remote_path}"
-remote_user_host="{remote_user_host}"
-app_port="{app_port}"
+project_path="{project_path}"
+server_directory="{server_directory}"
+server_host="{server_host}"
+server_port="{server_port}"
 
 echo '> 开始打包'
-cd $local_path || exit
+cd $project_path || exit
 ./gradlew bootJar || exit
 
 echo '> 开始上传'
-ssh -Tq  $remote_user_host "mkdir -p $remote_path"
-scp $local_path/build/libs/*.jar $remote_user_host:$remote_path
+ssh -Tq  $server_host "mkdir -p $server_directory"
+scp $project_path/build/libs/*.jar $server_host:$server_directory
 
 echo '> 开始启动'
-ssh -Tq $remote_user_host <<EOF
-cd $remote_path
-pid="\$(lsof -i:$app_port | sed -n "2,1p" | awk '{print \$2}')"
+ssh -Tq $server_host <<EOF
+cd $server_directory
+pid="\$(lsof -i:$server_port | sed -n "2,1p" | awk '{print \$2}')"
 test -n "\$pid" && kill -9 "\$pid"
 nohup java -jar *.jar > nohup.out 2>&1 &
 exit
