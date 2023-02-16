@@ -6,12 +6,14 @@ server_directory=${2}
 server_host=${3}
 server_port=${4}
 
+echo ${1} ${2} ${3} ${4}
+
 echo '> 开始打包'
 cd "$project_path" || exit
 ./gradlew bootJar || exit
 
 echo '> 开始上传'
-ssh -Tq  "$server_host" "mkdir -p $server_directory"
+ssh -Tq "$server_host" "mkdir -p $server_directory"
 scp "$project_path/build/libs/*.jar" "$server_host:$server_directory"
 
 echo '> 开始启动'
