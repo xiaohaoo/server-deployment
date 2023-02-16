@@ -2,8 +2,8 @@
 
 # 部署配置
 project_path=${1}
-server_host=${2}
-server_directory=${3}
+server_directory=${2%:*}
+server_host=${2#*:}
 
 echo '> 开始打包'
 cd "$project_path" || exit

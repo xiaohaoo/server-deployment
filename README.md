@@ -2,6 +2,14 @@
 
 ## 前端与后端部署发布脚本
 
+使用方式
+
+```shell
+curl -skL https://raw.githubusercontent.com/xiaohaoo/server-deployment/main/server-gradle-deployment.sh | zsh -s {project_path} {server_host:server_directory} {server_port}
+curl -skL https://raw.githubusercontent.com/xiaohaoo/server-deployment/main/web-npm-deployment.sh | zsh -s {project_path} {server_host:server_directory} {server_host}
+
+```
+
 ### 后端发布
 
 后端使用Gradle构建Java项目，发布脚本：[脚本程序](server-gradle-deployment.sh)。
