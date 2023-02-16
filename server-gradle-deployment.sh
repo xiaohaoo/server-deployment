@@ -1,21 +1,21 @@
 #!/bin/bash
 
 # 部署配置（替换变量值）
-project_path="{project_path}"
-server_directory="{server_directory}"
-server_host="{server_host}"
-server_port="{server_port}"
+project_path=${1}
+server_host=${2}
+server_directory=${3}
+server_port=${4}
 
 echo '> 开始打包'
-cd $project_path || exit
+cd "$project_path" || exit
 ./gradlew bootJar || exit
 
 echo '> 开始上传'
-ssh -Tq  $server_host "mkdir -p $server_directory"
-scp $project_path/build/libs/*.jar $server_host:$server_directory
+ssh -Tq  "$server_host" "mkdir -p $server_directory"
+scp "$project_path/build/libs/*.jar" "$server_host:$server_directory"
 
 echo '> 开始启动'
-ssh -Tq $server_host <<EOF
+ssh -Tq "$server_host" <<EOF
 cd $server_directory
 pid="\$(lsof -i:$server_port | sed -n "2,1p" | awk '{print \$2}')"
 test -n "\$pid" && kill -9 "\$pid"
