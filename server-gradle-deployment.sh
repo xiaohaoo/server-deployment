@@ -10,6 +10,7 @@ echo ${1} ${2} ${3} ${4}
 
 echo '> 开始打包'
 cd "$project_path" || exit
+pwd
 ./gradlew bootJar || exit
 
 echo '> 开始上传'
