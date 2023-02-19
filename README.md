@@ -6,7 +6,7 @@
 
 ```shell
 curl -skL https://raw.githubusercontent.com/xiaohaoo/server-deployment/main/server-gradle-deployment.sh | zsh -s {project_path} {server_host:server_directory} {server_port}
-curl -skL https://raw.githubusercontent.com/xiaohaoo/server-deployment/main/web-npm-deployment.sh | zsh -s {project_path} {server_host:server_directory} {server_host}
+curl -skL https://raw.githubusercontent.com/xiaohaoo/server-deployment/main/web-npm-deployment.sh | zsh -s {project_path} {server_host:server_directory}
 
 ```
 
