@@ -16,6 +16,6 @@ rm -rf $server_directory/*
 exit
 EOF
 
-scp -r "$project_path"/build/* "$server_host":"$server_directory" || exit
+scp -r "$project_path"/build/* "$server_host":"$server_directory"/ || exit
 
 echo -e "\033[32m> 部署完成\033[0m"
