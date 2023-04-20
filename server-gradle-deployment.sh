@@ -8,7 +8,7 @@ server_port="8656"
 
 echo '> 开始打包'
 cd "$project_path" || exit
-bash gradlew bootJar || exit
+./gradlew bootJar || exit
 
 echo '> 开始上传'
 ssh -Tq "$server_host" "mkdir -p $server_directory"
