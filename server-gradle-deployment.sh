@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # 部署配置（替换变量值）
-project_path="/Users/xiaohao/Documents/Java/JigsawGame/JigsawGame-server"
-server_directory="/home/JigsawGame"
-server_host="root@xiaohaoo.com"
-server_port="8656"
+project_path=${1}
+server_directory=${2#*:}
+server_host=${2%:*}
+server_port=${3}
 
 echo '> 开始打包'
 cd "$project_path" || exit
