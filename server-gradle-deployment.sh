@@ -8,7 +8,7 @@ server_port=${3}
 
 echo '> 开始打包'
 cd "$project_path" || exit
-./gradlew build --stacktrace || exit
+./gradlew build --stacktrace
 echo '> 开始上传'
 ssh -Tq "$server_host" "mkdir -p $server_directory"
 scp "$project_path"/build/libs/*.jar "$server_host":"$server_directory"
