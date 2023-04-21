@@ -9,8 +9,6 @@ server_port=${3}
 
 
 echo '> 开始上传'
-ssh -Tq "$server_host" "mkdir -p $server_directory"
-scp "$project_path"/build/libs/*.jar "$server_host":"$server_directory"
 
 echo '> 开始启动'
 ssh -Tq "$server_host" <<EOF
