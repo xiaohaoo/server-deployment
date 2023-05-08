@@ -8,7 +8,6 @@ server_port=${3}
 
 echo '> 开始打包'
 cd "$project_path" || exit
-(./gradlew bootJar)
 
 echo '> 开始启动'
 scp "$project_path"/build/libs/*.jar "$server_host":"$server_directory"
