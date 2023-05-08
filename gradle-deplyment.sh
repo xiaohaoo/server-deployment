@@ -10,8 +10,8 @@ echo '> 开始打包'
 cd "$project_path" || exit
 
 echo '> 开始启动'
-scp "$project_path"/build/libs/*.jar "$server_host":"$server_directory"
 ./gradlew bootJar || exit
+scp "$project_path"/build/libs/*.jar "$server_host":"$server_directory"
 
 echo '> 开始上传'
 ssh -Tq "$server_host" <<EOF
