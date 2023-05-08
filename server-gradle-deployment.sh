@@ -8,7 +8,7 @@ server_port=${3}
 
 echo '> 开始打包'
 cd "$project_path" || exit
-./gradlew bootJar
+
 echo $?
 
 echo '> 开始上传'
