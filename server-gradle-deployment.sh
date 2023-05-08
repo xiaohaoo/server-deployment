@@ -8,7 +8,8 @@ server_port=${3}
 
 echo '> 开始打包'
 cd "$project_path" || exit
-./gradlew bootJar || exit
+./gradlew bootJar
+echo $?
 
 echo '> 开始上传'
 ssh -Tq "$server_host" "mkdir -p $server_directory"
