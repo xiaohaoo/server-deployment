@@ -12,7 +12,6 @@ cd "$project_path" || exit
 echo $?
 
 echo '> 开始上传'
-ssh -Tq "$server_host" "mkdir -p $server_directory"
 
 echo '> 开始启动'
 ssh -Tq "$server_host" <<EOF
