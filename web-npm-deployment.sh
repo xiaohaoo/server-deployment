@@ -7,7 +7,7 @@ server_host=${2%:*}
 
 echo '> 开始打包'
 cd "$project_path" || exit
-npm run craco-build || exit
+npm run build || exit
 
 echo '> 开始上传'
 ssh -Tq "$server_host" <<EOF
