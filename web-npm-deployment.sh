@@ -17,9 +17,10 @@ exit
 EOF
 
 if [ -d "build" ]; then
-  scp -O -r "$(pwd)/build/*" "$server_host":"$server_directory" || exit
-elif [ -d "dist" ]; then
-  scp -O -r "$(pwd)/dist/*" "$server_host":"$server_directory" || exit
+  dir_name="build"
+else
+  dir_name="dist"
 fi
 
+scp -O -r "$(pwd)"/$dir_name/* "$server_host":"$server_directory" || exit
 echo -e "\033[32m> 部署完成\033[0m"
