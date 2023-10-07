@@ -16,6 +16,10 @@ rm -rf $server_directory/*
 exit
 EOF
 
-scp -O -r "$project_path"/build/* "$server_host":"$server_directory" || exit
+if [ -d "build" ]; then
+  scp -O -r "$(pwd)/build/*" "$server_host":"$server_directory" || exit
+elif [ -d "dist" ]; then
+  scp -O -r "$(pwd)/dist/*" "$server_host":"$server_directory" || exit
+fi
 
 echo -e "\033[32m> 部署完成\033[0m"
