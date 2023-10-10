@@ -4,9 +4,24 @@
 
 使用方式
 
+- Github
+
 ```shell
 zsh -c "$(curl -skL https://raw.githubusercontent.com/xiaohaoo/server-deployment/main/server-gradle-deployment.sh)" -s {project_path} {server_host:server_directory} {server_port}
+```
+
+```shell
 zsh -c "$(curl -skL https://raw.githubusercontent.com/xiaohaoo/server-deployment/main/web-npm-deployment.sh)" -s {project_path} {server_host:server_directory}
+```
+
+- Gitee
+
+```shell
+zsh -c "$(curl -skL https://gitee.com/xiaohaoo/server-deployment/raw/main/server-gradle-deployment.sh)" -s {project_path} {server_host:server_directory} {server_port}
+```
+
+```shell
+zsh -c "$(curl -skL https://gitee.com/xiaohaoo/server-deployment/raw/main/web-npm-deployment.sh)" -s {project_path} {server_host:server_directory}
 ```
 
 ### 后端发布
@@ -15,7 +30,7 @@ zsh -c "$(curl -skL https://raw.githubusercontent.com/xiaohaoo/server-deployment
 
 ### 前端发布
 
-前端使用npm构建web项目，发布脚本：[脚本程序](web-npm-deployment.sh)。
+前端使用Npm构建Web项目，发布脚本：[脚本程序](web-npm-deployment.sh)。
 
 ## Nginx相关配置
 
